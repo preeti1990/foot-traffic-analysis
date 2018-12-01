@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room_no: 1
+  avg_time_spent: 1.5
+
+two:
+  room_no: 1
+  avg_time_spent: 1.5

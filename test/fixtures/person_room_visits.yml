@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  person: one
+  room: one
+  in_time: 1
+  out_time: 1
+  time_spent: 1
+
+two:
+  person: two
+  room: two
+  in_time: 1
+  out_time: 1
+  time_spent: 1
