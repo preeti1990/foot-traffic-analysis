@@ -8,7 +8,7 @@ class Room < ApplicationRecord
   def self.get_rooms_details
     details = []
     self.order("room_no").each do |room|
-      details.push("#{room.room_no}, #{room.avg_time_spent.to_i} minutes average visit, #{room.total_persons_visited} visitor(s) total")
+      details.push("Room #{room.room_no}, #{room.avg_time_spent.to_i} minutes average visit, #{room.total_persons_visited} visitor(s) total")
     end
     details
   end
