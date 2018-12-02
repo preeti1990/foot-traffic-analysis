@@ -9,22 +9,27 @@
 
 #assuming that log_file.txt will be provided 
 #creating Room, Person and PersonRoomVisit from each entry of log file
+#replace content of log_file.txt with actual log file content
+#right now I am taking 2nd sample example as a log_file.txt content
 input_file1 = File.open("log_file.txt")
 total_lines = input_file1.first.split("\n").first.to_i
+#destroying all the old data from all the tables before inserting new one
 PersonRoomVisit.destroy_all
 Room.destroy_all
 Person.destroy_all
+
+#parsing the log file , and populating each log line content to the tables
 File.open("log_file.txt", "r") do |file_handle|
   file_handle.each_line.with_index(1) do |line, index|
     break if index == (total_lines * 2 + 1)
-    next if line.blank? || index == 1
-    raw_text = line.split(" ")
-    room_number = raw_text[1]
-    person_id = raw_text[0]
-    in_time =  raw_text[2] == 'I' ? raw_text[3].to_i : nil
+    next if line.blank? || index == 1 #in log file first line denoting the number of log line that's why skipping
+    raw_text = line.split(" ") #each log line 4 parameters are given saperated by space
+    room_number = raw_text[1] #2nd parameter is room number
+    person_id = raw_text[0]   #1st parameter is room_id
+    in_time =  raw_text[2] == 'I' ? raw_text[3].to_i : nil #3rd and 4th parameters giving in_time or out_time info
     out_time = raw_text[2] == 'O' ? raw_text[3].to_i : nil
     time_spent = nil
-    puts "out_time = #{out_time}"
+    
     room = Room.find_or_create_by(room_no: room_number)
     person = Person.find_or_create_by(person_id: person_id)
     person_room_visit = PersonRoomVisit.find_or_create_by(person_id: person.id, room_id: room.id)
